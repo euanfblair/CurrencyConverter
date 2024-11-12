@@ -1,18 +1,28 @@
 import java.util.*;
 import java.text.DecimalFormat;
-//Test Jenkins
+
 public class CurrencyConverter {
 
     public static void main(String[] args) {
 
-        double amount, dollar, pound, code, euro;
+        if (args.length < 2) {
+            System.out.println("Please provide amount and currency type.");
+            return;
+        }
 
+        double amount;
+        try {
+            amount = Double.parseDouble(args[0]);
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid amount provided.");
+            return;
+        }
+
+        String currency = args[1].toLowerCase();
+
+        double dollar, pound, euro;
         DecimalFormat f = new DecimalFormat("##.##");
 
-        amount = Integer.parseInt(args[0]);
-        String currency = args[1];
-
-        // For amounts Conversion
         switch (currency){
             case "dollars" :
                 // For Dollar Conversion
@@ -23,18 +33,21 @@ public class CurrencyConverter {
                 break;
             case "pounds":
                 // For Pound Conversion
-                dollar = amount + 1.36;
+                dollar = amount * 1.36;
                 System.out.println(amount + " Pounds = " + f.format(dollar) + " Dollars");
                 euro = amount * 1.19;
-                System.out.println(amount + " Pound = " + f.format(euro) + " Euros");
+                System.out.println(amount + " Pounds = " + f.format(euro) + " Euros");
                 break;
             case "euros":
                 // For Euro Conversion
-                dollar = amount * 1.31;
+                dollar = amount * 1.13;
                 System.out.println(amount + " Euros = " + f.format(dollar) + " Dollars");
                 pound = amount * 0.84;
                 System.out.println(amount + " Euros = " + f.format(pound) + " Pounds");
                 break;
+            default:
+                System.out.println("Currency not recognized.");
+                return;
         }
         System.out.println("Thank you for using the converter.");
     }
