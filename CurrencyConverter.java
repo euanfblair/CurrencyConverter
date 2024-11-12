@@ -20,7 +20,9 @@ public class CurrencyConverter {
 
         String currency = args[1].toLowerCase();
 
-        double dollar, pound, euro;
+        double dollar;
+	double pound;
+	double euro;
         DecimalFormat f = new DecimalFormat("##.##");
 
         switch (currency){
