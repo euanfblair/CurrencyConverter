@@ -1,5 +1,3 @@
-package com.example.currencyconverter;
-
 import org.junit.Test;
 import static org.junit.Assert.*;
 import java.io.ByteArrayOutputStream;
@@ -7,12 +5,7 @@ import java.io.PrintStream;
 
 public class CurrencyConverterTest {
 
-    // Constants for test values
-    private static final String AMOUNT = "100";
-    private static final String DOLLARS_UPPER = "DOLLARS";
-    private static final String DOLLARS_CAPITAL = "Dollars";
-    private static final String DOLLARS_LOWER = "dollars";
-
+    // Task 5a: Test for missing or invalid input arguments
     @Test
     public void testNoArgumentsProvided() {
         String[] args = {};
@@ -27,7 +20,7 @@ public class CurrencyConverterTest {
 
     @Test
     public void testInvalidAmountProvided() {
-        String[] args = {"invalid", DOLLARS_LOWER};
+        String[] args = {"invalid", "dollars"};
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
 
@@ -37,11 +30,12 @@ public class CurrencyConverterTest {
         assertEquals(expectedOutput, outContent.toString());
     }
 
+    // Task 5b: Test for case sensitivity in currency input
     @Test
     public void testCurrencyCaseSensitivity() {
-        String[] args1 = {AMOUNT, DOLLARS_UPPER};
-        String[] args2 = {AMOUNT, DOLLARS_CAPITAL};
-        String[] args3 = {AMOUNT, DOLLARS_LOWER};
+        String[] args1 = {"100", "DOLLARS"};
+        String[] args2 = {"100", "Dollars"};
+        String[] args3 = {"100", "dollars"};
 
         ByteArrayOutputStream outContent1 = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent1));
@@ -63,9 +57,11 @@ public class CurrencyConverterTest {
         assertEquals(output2, output3);
     }
 
+    // Task 5c: Test for correct conversion calculations
+
     @Test
     public void testDollarToPoundAndEuroConversion() {
-        String[] args = {"1", DOLLARS_LOWER};
+        String[] args = {"1", "dollars"};
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
 
